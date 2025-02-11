@@ -1,0 +1,23 @@
+{
+  "name": "mining-weather",
+  "version": "1.0.0",
+  "description": "Mining Weather, la météo qui mine le moral",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.7",
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
+  }
+}
