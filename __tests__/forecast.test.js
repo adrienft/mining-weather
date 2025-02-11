@@ -4,7 +4,7 @@ const app = require('../server');
 jest.mock('axios');
 const axios = require('axios');
 
-describe('Test de la route météo actuelle (tout en simulant les prévisions mais pas de vérification)', () => {
+describe('Test de la route des prévisions météo', () => {
     const mockWeatherData = {
         data: {
             name: 'Paris',
@@ -24,10 +24,10 @@ describe('Test de la route météo actuelle (tout en simulant les prévisions ma
         },
     };
 
-    test('Retourne les données météo actuelles pour une ville valide', async () => {
+    test('Retourne les données météo actuelles et les prévisions pour une ville valide', async () => {
         axios.get.mockResolvedValueOnce(mockWeatherData);
         axios.get.mockResolvedValueOnce(mockForecastData);
-		
+
         const response = await request(app).post('/').send({ city: 'Paris' });
 
         expect(response.status).toBe(200);
@@ -35,8 +35,17 @@ describe('Test de la route météo actuelle (tout en simulant les prévisions ma
         expect(response.text).toContain('Température : 15°C');
         expect(response.text).toContain('Conditions : ciel dégagé');
 
-        // Les prévisions sont simulées mais pas vérifiées
-        // Aucune vérification pour les prévisions ici
+        // Vérifications des prévisions sur 5 jours
+        expect(response.text).toContain('Prévisions sur 5 jours à midi');
+        expect(response.text).toContain('2025-02-09 12:00:00');
+        expect(response.text).toContain('14°C');
+        expect(response.text).toContain('partiellement nuageux');
+        expect(response.text).toContain('2025-02-10 12:00:00');
+        expect(response.text).toContain('16°C');
+        expect(response.text).toContain('ensoleillé');
+        expect(response.text).toContain('2025-02-11 12:00:00');
+        expect(response.text).toContain('12°C');
+        expect(response.text).toContain('nuageux');
     });
 
     test('Retourne une erreur si la ville est introuvable', async () => {
