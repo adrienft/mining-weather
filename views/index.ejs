@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mining Weather</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Mining Weather</h1>
+        <form action="/" method="POST">
+            <input type="text" name="city" placeholder="Entrez une ville">
+            <button type="submit">Rechercher</button>
+        </form>
+
+        <% if (weather) { %>
+            <h2>Météo actuelle à <%= weather.name %>, <%= weather.sys.country %></h2>
+            <p>Température : <%= weather.main.temp %>°C</p>
+            <p>Conditions : <%= weather.weather[0].description %></p>
+        <% } %>
+
+        <% if (error) { %>
+            <p class="error"><%= error %></p>
+        <% } %>
+		<h5>Mining Weather, la météo qui mine le moral</h5>
+    </div>
+</body>
+</html>
