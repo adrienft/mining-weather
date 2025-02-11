@@ -1,6 +1,6 @@
 const request = require('supertest');
 const { exec } = require('child_process');
-const app = require('../server');
+const app = require('../server.js');
 
 describe('Test du serveur', () => {
     test('La route GET / doit répondre avec un statut 200', async () => {

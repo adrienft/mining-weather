@@ -19,6 +19,10 @@
             <h2>Météo actuelle à <%= weather.name %>, <%= weather.sys.country %></h2>
             <p>Température : <%= weather.main.temp %>°C</p>
             <p>Conditions : <%= weather.weather[0].description %></p>
+            <form action="/favorite" method="POST">
+                <input type="hidden" name="city" value="<%= weather.name %>">
+                <button type="submit">Ajouter aux favoris</button>
+            </form>
         <% } %>
 
         <% if (forecast) { %>
@@ -46,7 +50,16 @@
         <% if (error) { %>
             <p class="error"><%= error %></p>
         <% } %>
-	<h5>Mining Weather, la météo qui mine le moral</h5>
+
+        <% if (favorites && favorites.length > 0) { %>
+            <h2>Villes favorites</h2>
+            <ul>
+                <% favorites.forEach(function(favorite) { %>
+                    <li><a href="/favorite/<%= favorite %>"><%= favorite %></a></li>
+                <% }); %>
+            </ul>
+        <% } %>
+        <h5>Mining Weather, la météo qui mine le moral</h5>
     </div>
 </body>
 </html>
