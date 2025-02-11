@@ -21,10 +21,32 @@
             <p>Conditions : <%= weather.weather[0].description %></p>
         <% } %>
 
+        <% if (forecast) { %>
+            <h2>Prévisions sur 5 jours à midi</h2>
+            <table class="forecast-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Température</th>
+                        <th>Conditions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% forecast.forEach(function(item) { %>
+                        <tr>
+                            <td><%= item.dt_txt %></td>
+                            <td class="temperature"><%= item.main.temp %>°C</td>
+                            <td><%= item.weather[0].description %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } %>
+
         <% if (error) { %>
             <p class="error"><%= error %></p>
         <% } %>
-		<h5>Mining Weather, la météo qui mine le moral</h5>
+	<h5>Mining Weather, la météo qui mine le moral</h5>
     </div>
 </body>
 </html>
