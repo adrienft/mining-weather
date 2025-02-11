@@ -25,7 +25,7 @@ describe('Test de la route des prévisions météo', () => {
     };
 
     test('Retourne les données météo actuelles et les prévisions pour une ville valide', async () => {
-        axios.get.mockResolvedValueOnce(mockWeatherData);
+        axios.get.mockResolvedValueOnce(mockWeatherData); 
         axios.get.mockResolvedValueOnce(mockForecastData);
 
         const response = await request(app).post('/').send({ city: 'Paris' });
@@ -50,7 +50,8 @@ describe('Test de la route des prévisions météo', () => {
 
     test('Retourne une erreur si la ville est introuvable', async () => {
         axios.get.mockRejectedValue(new Error('Ville non trouvée'));
-        const response = await request(app).post('/').send({ city: 'VIVELESMINESALES' });
+
+        const response = await request(app).post('/').send({ city: 'FakeCity' });
 
         expect(response.status).toBe(200);
         expect(response.text).toContain('Ville non trouvée !');
